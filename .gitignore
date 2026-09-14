@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Env / secrets — never commit
+.env
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Docker / data
+postgres-data/
+redis-data/

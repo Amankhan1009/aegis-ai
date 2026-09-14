@@ -1,0 +1,46 @@
+# ============================================================
+# Enterprise AI Operations Platform — dependencies
+# Sections: runtime first, dev/test at the bottom.
+# ============================================================
+
+# --- Web framework ---
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9        # required by FastAPI's OAuth2 login form
+
+# --- Validation / settings ---
+pydantic>=2.9
+pydantic-settings>=2.5
+
+# --- Persistence ---
+sqlalchemy>=2.0.35
+alembic>=1.13                  # database migrations
+psycopg[binary]>=3.2           # PostgreSQL driver (works with DATABASE_URL)
+
+# --- Cache / rate limiting ---
+redis>=5.0.8
+
+# --- AI provider client ---
+groq>=0.11
+httpx>=0.27
+
+# --- Auth ---
+PyJWT>=2.9
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.0,<4.1               # passlib 1.7.4 is incompatible with bcrypt 4.1+
+
+# --- Observability ---
+structlog>=24.4                # structured JSON logging (ADR-005)
+prometheus-client>=0.20        # metrics endpoint
+opentelemetry-api>=1.27
+opentelemetry-sdk>=1.27
+opentelemetry-instrumentation-fastapi>=0.48b0
+opentelemetry-exporter-otlp-proto-http>=1.27
+
+# --- Operations dashboard ---
+streamlit>=1.39
+
+# --- Dev / test (mock LLM calls; never spend quota in tests) ---
+pytest>=8.3
+respx>=0.21                    # mocks httpx / Groq HTTP calls
+ruff>=0.6                      # linter
