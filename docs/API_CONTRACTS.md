@@ -14,3 +14,41 @@
   "request_id": "3f6c...",
   "detail": []
 }
+
+## Auth endpoints (Milestone 5)
+
+### POST /api/v1/auth/login — OAuth2 password flow
+Form fields: `username`, `password`.
+- 200: `{ "access_token": "&lt;jwt&gt;", "token_type": "bearer" }`
+- 401: invalid credentials
+
+Demo users (bcrypt-hashed, in-memory — see app/core/users.py):
+| username | password | role |
+|----------|----------|------|
+| admin | admin-pass-123 | ADMIN |
+| dev | dev-pass-123 | DEVELOPER |
+| user | user-pass-123 | USER |
+
+### GET /api/v1/me — any authenticated user
+Header: `Authorization: Bearer &lt;token&gt;`.
+- 200: `{ "username": "...", "role": "..." }`
+- 401: missing/invalid/expired token
+
+### GET /api/v1/admin-only — ADMIN role required
+- 200: `{ "message": "admin access granted", "user": "..." }`
+- 403: authenticated but wrong role
+
+## AI endpoints (Milestone 6)
+
+### POST /api/v1/ai/process — authenticated users
+Headers: `Authorization: Bearer &lt;token&gt;`, `X-Request-ID` (optional).
+Body:
+```json
+{
+  "prompt": "Explain circuit breakers in two sentences.",
+  "system_prompt": "You are a concise assistant.",
+  "temperature": 0.7
+}
+- 200: AIProcessResponse (request_id, provider, model, output, tokens, latency)
+- 401/403: auth failures
+- 500: provider failure (reliability handling lands in M7)

@@ -13,11 +13,11 @@ Planned → In Progress → Implemented → Tested → Verified
 | 0 | Project planning (docs, architecture, stack) | Verified |
 | 1 | Project foundation (folders, requirements, README) | Verified |
 | 2 | Configuration & secrets (.env, Pydantic settings) | Verified |
-| 3 | FastAPI foundation (health/ready, error handling, request IDs) | In Progress |
-| 4 | PostgreSQL (SQLAlchemy, Alembic, tables) | Planned |
-| 5 | Authentication & authorization (JWT, roles) | Planned |
-| 6 | AI service (POST /api/v1/ai/process) | Planned |
-| 7 | Reliability (timeout, retry, backoff, circuit breaker, fallback) | Planned |
+| 3 | FastAPI foundation (health/ready, error handling, request IDs) | Verified |
+| 4 | PostgreSQL (SQLAlchemy, Alembic, tables) | Verified |
+| 5 | Authentication & authorization (JWT, roles) | Verified |
+| 6 | AI service (POST /api/v1/ai/process) | Verified |
+| 7 | Reliability (timeout, retry, backoff, circuit breaker, fallback) | In Progress |
 | 8 | Idempotency | Planned |
 | 9 | Caching & rate limiting (Redis) | Planned |
 | 10 | Structured logging | Planned |
