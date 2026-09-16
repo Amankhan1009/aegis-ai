@@ -52,3 +52,17 @@ Body:
 - 200: AIProcessResponse (request_id, provider, model, output, tokens, latency)
 - 401/403: auth failures
 - 500: provider failure (reliability handling lands in M7)
+
+### POST /api/v1/ai/process — idempotency (Milestone 8)
+Optional header: `Idempotency-Key: <client-generated-uuid>`.
+- First call with a key: normal processing; result stored against the key.
+- Retry with same key: stored result returned (no LLM call, no extra tokens).
+- Retry while original still running: `409 Conflict`.
+- Failed original: key marked failed; a new key is required to re-execute.
+
+### POST /api/v1/ai/process — rate limit & cache (Milestone 9)
+- Rate limit: 10 requests/minute per user → `429` with retry hint.
+- Cache: identical (provider, model, prompt, system_prompt, temperature) within
+  15 min returns the stored response instantly (no LLM call, no tokens).
+- Fallback responses are never cached.
+- Redis outage: rate limit fails open (allow), cache skipped — app stays up.

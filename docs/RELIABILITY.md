@@ -16,3 +16,9 @@
 - Breaker OPEN → immediate fallback (no provider call).
 - Retries exhausted → fallback with reason recorded in logs (M10) and failures table (M15 wiring).
 - Fallback responses are identifiable: `output_tokens == 0` and the fixed fallback text.
+
+## Redis degradation policy (Milestone 9)
+| Feature | Redis down behavior |
+|---------|---------------------|
+| Rate limit | Fail-open: allow request + warning log |
+| Cache | Skip silently |

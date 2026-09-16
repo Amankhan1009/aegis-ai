@@ -38,3 +38,23 @@
 - Added app/reliability/: retry.py (backoff+jitter, retryable classification),
   circuit_breaker.py (CLOSED/OPEN/HALF_OPEN, trip count), decorators.py (compose).
 - AI service now wraps provider calls: breaker → retry → timeout; fallback on failure.
+
+## Milestone 8 — Idempotency
+- Added app/services/idempotency.py (claim/complete/fail on workflow_executions).
+- POST /ai/process accepts Idempotency-Key; duplicates replay stored result (409 if in-flight).
+
+## Milestone 9 — Caching & Rate Limiting
+- Added app/core/redis_client.py (graceful degradation), services/rate_limit.py
+  (10 req/min per user, fail-open), services/cache.py (SHA256 key, 15min TTL,
+  fallback responses never cached).
+
+## Milestone 10 — Structured Logging
+- Added app/observability/: logging.py (structlog JSON), context.py (contextvars).
+- RequestIDMiddleware binds request_id/user to every log line.
+- ai.endpoint + ai.service emit structured events (started/completed/failed,
+  cache hit/miss, idempotency replay, model_call_completed).
+
+## Milestone 11 — Metrics
+- Added app/observability/metrics.py (Prometheus counters/histograms + cost model).
+- GET /metrics endpoint; ai endpoint/service emit request, cache, rate-limit,
+  LLM token/latency/outcome, and estimated-cost metrics.

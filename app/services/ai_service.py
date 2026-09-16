@@ -1,14 +1,12 @@
-"""AI orchestration service with reliability wrapping (Milestone 7).
-
-Flow: breaker → retry/backoff → provider call (timeout inside provider).
-On CircuitOpenError we return a controlled fallback instead of crashing.
-"""
+"""AI orchestration service with reliability (M7) + metrics/cost (M11)."""
 
 from fastapi import Request
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
 from app.models.ai_usage import AIUsage
+from app.observability import metrics
+from app.observability.logging import get_logger
 from app.providers.base import ChatMessage
 from app.providers.factory import get_provider
 from app.reliability.circuit_breaker import CircuitBreaker, CircuitOpenError
@@ -20,9 +18,8 @@ FALLBACK_MESSAGE = (
     "(request_id logged) — please retry shortly."
 )
 
-# One breaker per process; in production this lives in app state (Milestone 11
-# will expose trip counts as metrics).
 _llm_breaker = CircuitBreaker(name="llm", failure_threshold=3, recovery_timeout_seconds=20.0)
+log = get_logger("ai.service")
 
 
 def process_ai_request(
@@ -45,11 +42,32 @@ def process_ai_request(
             max_attempts=3,
         )
     except CircuitOpenError:
-        return _fallback_response(settings, request_id, reason="circuit_open")
+        metrics.LLM_REQUESTS.labels(provider=settings.ai_provider, model=settings.ai_model, outcome="breaker_open").inc()
+        return _fallback_response(settings, request_id)
     except TimeoutError:
-        return _fallback_response(settings, request_id, reason="timeout_after_retries")
+        metrics.LLM_REQUESTS.labels(provider=settings.ai_provider, model=settings.ai_model, outcome="timeout").inc()
+        return _fallback_response(settings, request_id)
     except Exception:
-        return _fallback_response(settings, request_id, reason="provider_error")
+        metrics.LLM_REQUESTS.labels(provider=settings.ai_provider, model=settings.ai_model, outcome="error").inc()
+        return _fallback_response(settings, request_id)
+
+    cost = metrics.estimate_cost_usd(result.model, result.input_tokens, result.output_tokens)
+
+    metrics.LLM_REQUESTS.labels(provider=settings.ai_provider, model=result.model, outcome="success").inc()
+    metrics.LLM_TOKENS.labels(provider=settings.ai_provider, model=result.model, kind="input").inc(result.input_tokens)
+    metrics.LLM_TOKENS.labels(provider=settings.ai_provider, model=result.model, kind="output").inc(result.output_tokens)
+    metrics.LLM_LATENCY.labels(provider=settings.ai_provider, model=result.model).observe(result.latency_ms / 1000)
+    metrics.ESTIMATED_COST_USD.labels(provider=settings.ai_provider, model=result.model).inc(cost)
+
+    log.info(
+        "model_call_completed",
+        operation="ai.model_call",
+        model=result.model,
+        input_tokens=result.input_tokens,
+        output_tokens=result.output_tokens,
+        latency_ms=result.latency_ms,
+        estimated_cost_usd=cost,
+    )
 
     usage = AIUsage(
         request_id=request_id,
@@ -58,7 +76,7 @@ def process_ai_request(
         input_tokens=result.input_tokens,
         output_tokens=result.output_tokens,
         latency_ms=result.latency_ms,
-        estimated_cost_usd=0.0,
+        estimated_cost_usd=cost,
     )
     db.add(usage)
     db.commit()
@@ -74,8 +92,7 @@ def process_ai_request(
     )
 
 
-def _fallback_response(settings, request_id: str, reason: str) -> AIProcessResponse:
-    """Controlled degradation — never crash the caller."""
+def _fallback_response(settings, request_id: str) -> AIProcessResponse:
     return AIProcessResponse(
         request_id=request_id,
         provider=settings.ai_provider,

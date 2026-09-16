@@ -17,11 +17,11 @@ Planned → In Progress → Implemented → Tested → Verified
 | 4 | PostgreSQL (SQLAlchemy, Alembic, tables) | Verified |
 | 5 | Authentication & authorization (JWT, roles) | Verified |
 | 6 | AI service (POST /api/v1/ai/process) | Verified |
-| 7 | Reliability (timeout, retry, backoff, circuit breaker, fallback) | In Progress |
-| 8 | Idempotency | Planned |
-| 9 | Caching & rate limiting (Redis) | Planned |
+| 7 | Reliability (timeout, retry, backoff, circuit breaker, fallback) | Verified |
+| 8 | Idempotency | Verified |
+| 9 | Caching & rate limiting (Redis) | In Progress |
 | 10 | Structured logging | Planned |
-| 11 | Metrics | Planned |
+| 11 | Metrics | In Progress |
 | 12 | Distributed tracing (OpenTelemetry) | Planned |
 | 13 | AI output validation & guardrails | Planned |
 | 14 | Audit & governance | Planned |
