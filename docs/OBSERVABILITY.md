@@ -28,3 +28,12 @@ uvicorn app.main:app --port 8000 2&gt;&1 | jq .
 - Cost model: per-1M-token price table in `app/observability/metrics.py`
   (`MODEL_PRICING`). Values are ESTIMATES — update from the provider's pricing
   page; never treat as billing truth.
+
+## Distributed tracing (Milestone 12)
+- OpenTelemetry SDK; auto-instrumentation for FastAPI (parent span per request).
+- Manual spans: `ai.process_endpoint` (user, idempotency key, tokens),
+  `ai.model_call` (model, provider, tokens, latency, outcome).
+- Exporter: console by default (spans in uvicorn logs). Set
+  `OTEL_EXPORTER_OTLP_ENDPOINT=https://...` to send to Jaeger/Tempo/etc.
+- request_id is propagated as the trace correlation anchor (same value in
+  logs, spans, and DB rows).

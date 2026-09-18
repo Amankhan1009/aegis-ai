@@ -22,3 +22,10 @@
 |---------|---------------------|
 | Rate limit | Fail-open: allow request + warning log |
 | Cache | Skip silently |
+
+## AI output validation (Milestone 13)
+- Optional `structured_output` spec: required fields + allowed values.
+- Model must reply with JSON only; we tolerate markdown fences.
+- Invalid → 1 retry with correction prompt → fallback with `validation_failed=true`.
+- Guardrails: max output size (8000 chars), schema check, allowed-value check.
+- Metric: `aiops_llm_invalid_output_total` counts each invalid event.

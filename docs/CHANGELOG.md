@@ -58,3 +58,24 @@
 - Added app/observability/metrics.py (Prometheus counters/histograms + cost model).
 - GET /metrics endpoint; ai endpoint/service emit request, cache, rate-limit,
   LLM token/latency/outcome, and estimated-cost metrics.
+
+## Milestone 12 — Distributed Tracing
+- Added app/observability/tracing.py (OTel SDK, console/OTLP exporter switch).
+- Manual spans: ai.process_endpoint, ai.model_call (with token/latency attrs).
+- FastAPI auto-instrumentation in main.py.
+
+## Milestone 13 — AI Output Validation & Guardrails
+- Added app/services/validation.py (JSON extraction, schema/allowed-value checks,
+  size guardrail, correction-prompt builder).
+- structured_output spec on POST /ai/process; single retry then fallback;
+  aiops_llm_invalid_output_total metric.
+
+## Milestone 14 — Audit & Governance
+- Added app/services/audit.py (fail-safe audit writer).
+- Added GET /api/v1/audit/events (ADMIN only) with actor/outcome filters.
+- ai.process endpoint records attempt/success/failure/cache/replay events.
+
+## Milestone 15 — Failure Injection
+- Added app/services/failure_injection.py (X-Fail-Mode header: timeout,
+  error_500, rate_limit, invalid, db_timeout).
+- AI service records failures to failures table; endpoint passes fail_mode.

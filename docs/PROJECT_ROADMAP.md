@@ -21,11 +21,11 @@ Planned → In Progress → Implemented → Tested → Verified
 | 8 | Idempotency | Verified |
 | 9 | Caching & rate limiting (Redis) | In Progress |
 | 10 | Structured logging | Planned |
-| 11 | Metrics | In Progress |
-| 12 | Distributed tracing (OpenTelemetry) | Planned |
-| 13 | AI output validation & guardrails | Planned |
-| 14 | Audit & governance | Planned |
-| 15 | Failure injection | Planned |
+| 11 | Metrics | Verified |
+| 12 | Distributed tracing (OpenTelemetry) | Verified |
+| 13 | AI output validation & guardrails | Verified |
+| 14 | Audit & governance | In Progress |
+| 15 | Failure injection | In Progress |
 | 16 | Streamlit operations dashboard | Planned |
 | 17 | Docker / Docker Compose | Planned |
 | 18 | Testing (unit + integration, mocked LLM) | Planned |
