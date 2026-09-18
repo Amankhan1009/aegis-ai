@@ -26,7 +26,7 @@ Planned → In Progress → Implemented → Tested → Verified
 | 13 | AI output validation & guardrails | Verified |
 | 14 | Audit & governance | In Progress |
 | 15 | Failure injection | In Progress |
-| 16 | Streamlit operations dashboard | Planned |
+| 16 | Streamlit operations dashboard | Verified |
 | 17 | Docker / Docker Compose | Planned |
 | 18 | Testing (unit + integration, mocked LLM) | Planned |
 | 19 | CI/CD (GitHub Actions) | Planned |

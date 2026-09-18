@@ -79,3 +79,14 @@
 - Added app/services/failure_injection.py (X-Fail-Mode header: timeout,
   error_500, rate_limit, invalid, db_timeout).
 - AI service records failures to failures table; endpoint passes fail_mode.
+
+## Milestone 16 — Streamlit Operations Dashboard
+- Added JWT login and session state for the token, username, and role.
+- Added Overview, AI Operations, Failure Testing, Audit Events, System Health,
+  Metrics, and Logout navigation backed by the existing FastAPI APIs.
+- Added Prometheus metric summaries, role-aware audit error handling, and
+  operator-friendly handling for API, network, timeout, authentication, and
+  rate-limit errors.
+- Verified locally with FastAPI and Streamlit, including login, navigation,
+  health/readiness, metrics, admin/non-admin audit access, and invalid-output
+  failure injection.
