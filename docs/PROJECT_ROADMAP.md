@@ -31,7 +31,7 @@ Planned → In Progress → Implemented → Tested → Verified
 | 18 | Testing (unit + integration, mocked LLM) | Verified |
 | 19 | CI/CD (GitHub Actions) | Verified |
 | 20 | Final failure demonstration (>= 3 scenarios) | Verified |
-| 21 | Final documentation | Planned |
+| 21 | Final documentation | Verified |
 
 ## Rules
 - One milestone at a time. Never skip verification.
