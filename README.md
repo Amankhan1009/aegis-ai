@@ -197,5 +197,6 @@ recorded operational evidence.
 - [Failure demonstration](docs/FAILURE_DEMONSTRATION.md)
 - [Architecture decisions](docs/DECISIONS.md)
 - [Operations runbook](docs/OPERATIONS_RUNBOOK.md)
+- [Testing strategy](docs/TESTING_STRATEGY.md)
 - [Changelog](docs/CHANGELOG.md)
 

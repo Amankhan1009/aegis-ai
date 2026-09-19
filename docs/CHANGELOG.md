@@ -122,6 +122,7 @@
 - Recorded final results in docs/FAILURE_DEMONSTRATION.md.
 
 ## Milestone 21 — Final Documentation
+- Updated the testing strategy with current unit, integration, isolation, and execution guidance.
 - Replaced the initial project README with a complete platform overview, local and
   Docker Compose setup instructions, API reference, dashboard guide, testing,
   CI/CD, and documentation index.
