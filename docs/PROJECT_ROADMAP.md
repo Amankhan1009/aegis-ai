@@ -29,7 +29,7 @@ Planned → In Progress → Implemented → Tested → Verified
 | 16 | Streamlit operations dashboard | Verified |
 | 17 | Docker / Docker Compose | Verified |
 | 18 | Testing (unit + integration, mocked LLM) | Verified |
-| 19 | CI/CD (GitHub Actions) | Planned |
+| 19 | CI/CD (GitHub Actions) | Verified |
 | 20 | Final failure demonstration (&gt;= 3 scenarios) | Planned |
 | 21 | Final documentation | Planned |
 
