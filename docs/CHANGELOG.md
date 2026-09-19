@@ -113,3 +113,10 @@
 - Added Docker Hub publishing for API and Streamlit dashboard images after successful pushes to `main`.
 - Published immutable Git SHA tags and rolling `latest` tags for both images.
 - Verified the full GitHub Actions workflow and Docker Hub image publishing.
+
+## Milestone 20 — Final Failure Demonstration
+- Demonstrated controlled invalid structured output, simulated provider 500 error,
+  and simulated provider rate-limit failure scenarios.
+- Verified retry or validation handling, controlled fallback responses, request IDs,
+  audit events, structured logs, Prometheus metrics, and dashboard visibility.
+- Recorded final results in docs/FAILURE_DEMONSTRATION.md.

@@ -30,7 +30,7 @@ Planned → In Progress → Implemented → Tested → Verified
 | 17 | Docker / Docker Compose | Verified |
 | 18 | Testing (unit + integration, mocked LLM) | Verified |
 | 19 | CI/CD (GitHub Actions) | Verified |
-| 20 | Final failure demonstration (&gt;= 3 scenarios) | Planned |
+| 20 | Final failure demonstration (>= 3 scenarios) | Verified |
 | 21 | Final documentation | Planned |
 
 ## Rules

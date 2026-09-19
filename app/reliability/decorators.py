@@ -26,4 +26,10 @@ def resilient_call(
         except httpx.TimeoutException as exc:
             raise TimeoutError(str(exc)) from exc
 
-    return breaker.call(lambda: with_retry(attempt, max_attempts=max_attempts))
+    return breaker.call(
+        lambda: with_retry(
+            attempt,
+            max_attempts=max_attempts,
+            operation="ai.model_call",
+        )
+    )

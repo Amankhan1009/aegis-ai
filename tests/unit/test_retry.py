@@ -55,6 +55,7 @@ def test_retry_returns_successful_result_after_transient_failures(
         max_attempts=3,
         base_delay_seconds=0.5,
         sleep=sleeps.append,
+        operation="test.retry",
     )
 
     assert result == "success"
@@ -114,9 +115,12 @@ def test_retry_delay_is_capped(
         lambda _start, _end: 0.0,
     )
 
+    def always_timeout() -> None:
+        raise TimeoutError("timeout")
+
     with pytest.raises(TimeoutError):
         with_retry(
-            lambda: (_ for _ in ()).throw(TimeoutError("timeout")),
+            always_timeout,
             max_attempts=4,
             base_delay_seconds=1.0,
             max_delay_seconds=2.0,

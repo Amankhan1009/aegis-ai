@@ -9,6 +9,8 @@ import time
 from collections.abc import Callable
 from typing import TypeVar
 
+from app.observability.metrics import RETRY_COUNT
+
 T = TypeVar("T")
 
 RETRYABLE_EXCEPTIONS = (TimeoutError, ConnectionError)
@@ -36,16 +38,27 @@ def with_retry(
     base_delay_seconds: float = 0.5,
     max_delay_seconds: float = 8.0,
     sleep: Callable[[float], None] = time.sleep,
+    operation: str = "unknown",
 ) -> T:
     """Run fn with retries. Returns fn's result or re-raises the last error."""
     last_exc: BaseException | None = None
+
     for attempt in range(1, max_attempts + 1):
         try:
             return fn()
         except Exception as exc:
             last_exc = exc
+
             if attempt == max_attempts or not is_retryable(exc):
                 raise
-            delay = min(base_delay_seconds * (2 ** (attempt - 1)), max_delay_seconds)
-            sleep(delay + random.uniform(0, delay * 0.25))  # jitter
+
+            RETRY_COUNT.labels(operation=operation).inc()
+
+            delay = min(
+                base_delay_seconds * (2 ** (attempt - 1)),
+                max_delay_seconds,
+            )
+
+            sleep(delay + random.uniform(0, delay * 0.25))
+
     raise last_exc  # unreachable, satisfies type checkers
