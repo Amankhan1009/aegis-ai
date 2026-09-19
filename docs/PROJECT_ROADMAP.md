@@ -19,13 +19,13 @@ Planned → In Progress → Implemented → Tested → Verified
 | 6 | AI service (POST /api/v1/ai/process) | Verified |
 | 7 | Reliability (timeout, retry, backoff, circuit breaker, fallback) | Verified |
 | 8 | Idempotency | Verified |
-| 9 | Caching & rate limiting (Redis) | In Progress |
-| 10 | Structured logging | Planned |
+| 9 | Caching & rate limiting (Redis) | Verified |
+| 10 | Structured logging | Verified |
 | 11 | Metrics | Verified |
 | 12 | Distributed tracing (OpenTelemetry) | Verified |
 | 13 | AI output validation & guardrails | Verified |
-| 14 | Audit & governance | In Progress |
-| 15 | Failure injection | In Progress |
+| 14 | Audit & governance | Verified |
+| 15 | Failure injection | Verified |
 | 16 | Streamlit operations dashboard | Verified |
 | 17 | Docker / Docker Compose | Verified |
 | 18 | Testing (unit + integration, mocked LLM) | Verified |
