@@ -13,7 +13,6 @@ from typing import TypeVar
 T = TypeVar("T")
 
 
-
 class BreakerState(StrEnum):
     CLOSED = "CLOSED"
     OPEN = "OPEN"
@@ -70,7 +69,10 @@ class CircuitBreaker:
     def _on_failure(self) -> None:
         with self._lock:
             self._failure_count += 1
-            if self._state == BreakerState.HALF_OPEN or self._failure_count >= self.failure_threshold:
+            if (
+                self._state == BreakerState.HALF_OPEN
+                or self._failure_count >= self.failure_threshold
+            ):
                 if self._state != BreakerState.OPEN:
                     self.trip_count += 1
                 self._state = BreakerState.OPEN

@@ -16,6 +16,7 @@ from app.core.config import get_settings
 # Setup
 # ============================================================
 
+
 def setup_logging() -> None:
     """Configure stdlib + structlog. Called once at app startup."""
     settings = get_settings()

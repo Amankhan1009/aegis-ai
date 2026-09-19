@@ -31,6 +31,7 @@ log = get_logger("ai.endpoint")
 
 # ==================== AI Processing Endpoint ====================
 
+
 @router.post("/process", response_model=AIProcessResponse)
 def process(
     payload: AIProcessRequest,
@@ -144,9 +145,7 @@ def process(
                     },
                 )
 
-                return AIProcessResponse(
-                    **idempotency.result_to_response(existing)
-                )
+                return AIProcessResponse(**idempotency.result_to_response(existing))
 
         # ==================== Cache ====================
 

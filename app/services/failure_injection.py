@@ -43,7 +43,9 @@ class FailingProvider:
         self._real = real_provider
         self._mode = mode
 
-    def chat(self, messages: list[ChatMessage], model: str, timeout_seconds: float = 30.0) -> LLMResult:
+    def chat(
+        self, messages: list[ChatMessage], model: str, timeout_seconds: float = 30.0
+    ) -> LLMResult:
         if self._mode == FailMode.TIMEOUT:
             import time
 

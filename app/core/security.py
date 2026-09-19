@@ -15,6 +15,7 @@ ALGORITHM = "HS256"
 # Passwords
 # ============================================================
 
+
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
@@ -27,12 +28,11 @@ def verify_password(plain: str, hashed: str) -> bool:
 # JWT
 # ============================================================
 
+
 def create_access_token(subject: str, role: str) -> str:
     """Sign a JWT carrying the user id and role."""
     settings = get_settings()
-    expire = datetime.now(UTC) + timedelta(
-        minutes=settings.access_token_expire_minutes
-    )
+    expire = datetime.now(UTC) + timedelta(minutes=settings.access_token_expire_minutes)
     payload = {"sub": subject, "role": role, "exp": expire}
     return jwt.encode(payload, settings.jwt_secret_key, algorithm=ALGORITHM)
 

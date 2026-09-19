@@ -8,7 +8,7 @@ from fastapi import HTTPException, Request, status
 
 from app.core.redis_client import get_redis
 
-LIMIT = 10          # requests
+LIMIT = 10  # requests
 WINDOW_SECONDS = 60
 
 

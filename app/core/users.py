@@ -12,6 +12,7 @@ from app.schemas.auth import Role
 # Demo users (username -> record)
 # ============================================================
 
+
 def _seed() -> dict[str, dict]:
     return {
         "admin": {

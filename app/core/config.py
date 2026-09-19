@@ -13,6 +13,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 # Settings
 # ============================================================
 
+
 class Settings(BaseSettings):
     """Runtime configuration for the platform."""
 
@@ -46,6 +47,7 @@ class Settings(BaseSettings):
 # ============================================================
 # Accessor
 # ============================================================
+
 
 @lru_cache
 def get_settings() -> Settings:

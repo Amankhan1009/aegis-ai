@@ -19,6 +19,7 @@ from app.observability.tracing import setup_tracing
 # App factory
 # ============================================================
 
+
 def create_app() -> FastAPI:
     settings = get_settings()
     setup_logging()

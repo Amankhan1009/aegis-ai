@@ -13,7 +13,5 @@ _PROVIDERS: dict[str, type[ModelProvider]] = {
 def get_provider() -> ModelProvider:
     name = get_settings().ai_provider.lower()
     if name not in _PROVIDERS:
-        raise ValueError(
-            f"Unknown AI_PROVIDER '{name}'. Supported: {sorted(_PROVIDERS)}"
-        )
+        raise ValueError(f"Unknown AI_PROVIDER '{name}'. Supported: {sorted(_PROVIDERS)}")
     return _PROVIDERS[name]()

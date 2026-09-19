@@ -15,6 +15,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 # Login
 # ============================================================
 
+
 @router.post("/login", response_model=TokenResponse)
 def login(form: OAuth2PasswordRequestForm = Depends()) -> TokenResponse:
     user = get_user(form.username)
@@ -31,6 +32,7 @@ def login(form: OAuth2PasswordRequestForm = Depends()) -> TokenResponse:
 # ============================================================
 # Current-user dependency (reused by protected endpoints)
 # ============================================================
+
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> CurrentUser:
     from jwt import PyJWTError

@@ -19,6 +19,7 @@ def resilient_call(
     max_attempts: int = 3,
 ) -> T:
     """Run fn with: circuit breaker → retry/backoff → timeout on each attempt."""
+
     def attempt() -> T:
         try:
             return fn()

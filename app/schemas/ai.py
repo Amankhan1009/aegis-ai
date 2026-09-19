@@ -21,4 +21,4 @@ class AIProcessResponse(BaseModel):
     output_tokens: int
     latency_ms: float
     structured_result: dict | None = None  # populated when validation succeeds
-    validation_failed: bool = False        # True when retry also failed
+    validation_failed: bool = False  # True when retry also failed

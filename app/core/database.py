@@ -25,6 +25,7 @@ class Base(DeclarativeBase):
 # Session dependency (FastAPI)
 # ============================================================
 
+
 def get_db() -> Generator[Session, None, None]:
     """Yield a database session and guarantee it closes."""
     db = SessionLocal()

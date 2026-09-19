@@ -44,6 +44,7 @@ log = get_logger("ai.service")
 
 # ==================== AI Request Processing ====================
 
+
 def process_ai_request(
     payload: AIProcessRequest,
     db: Session,
@@ -365,6 +366,7 @@ def process_ai_request(
 
 # ==================== Failure Persistence ====================
 
+
 def _record_failure(
     db: Session,
     request_id: str,
@@ -392,6 +394,7 @@ def _record_failure(
 
 
 # ==================== Fallback Response ====================
+
 
 def _fallback_response(
     settings,
