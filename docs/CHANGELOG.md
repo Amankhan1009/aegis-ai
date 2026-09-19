@@ -90,3 +90,10 @@
 - Verified locally with FastAPI and Streamlit, including login, navigation,
   health/readiness, metrics, admin/non-admin audit access, and invalid-output
   failure injection.
+
+## Milestone 17 — Docker / Docker Compose
+- Added backend and Streamlit Dockerfiles.
+- Added Docker Compose services for FastAPI, Streamlit, PostgreSQL, and Redis.
+- Added persistent PostgreSQL and Redis volumes plus service health checks.
+- Configured the Streamlit container to call the internal API service.
+- Verified the full stack locally with `docker compose up --build`, backend health/readiness endpoints, and dashboard login.
