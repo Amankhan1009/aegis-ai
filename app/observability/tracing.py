@@ -25,6 +25,13 @@ def setup_tracing() -> None:
         return
 
     settings = get_settings()
+
+    # Tests do not export spans to stdout or an external telemetry backend.
+    if settings.app_env == "test":
+        trace.set_tracer_provider(trace.NoOpTracerProvider())
+        _tracer = trace.get_tracer(settings.app_name)
+        return
+
     resource = Resource.create(
         {"service.name": settings.app_name, "deployment.environment": settings.app_env}
     )

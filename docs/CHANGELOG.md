@@ -97,3 +97,12 @@
 - Added persistent PostgreSQL and Redis volumes plus service health checks.
 - Configured the Streamlit container to call the internal API service.
 - Verified the full stack locally with `docker compose up --build`, backend health/readiness endpoints, and dashboard login.
+
+## Milestone 18 — Testing
+- Added isolated PostgreSQL integration-test infrastructure using Testcontainers.
+- Added health, readiness, authentication, authorization, audit, and AI endpoint integration tests.
+- Mocked the AI provider for AI processing tests; no Groq API calls are made during tests.
+- Added unit tests for structured-output validation, failure injection, cost estimation,
+  circuit-breaker state transitions, retry/backoff behavior, and resilient-call composition.
+- Added test-environment no-op OpenTelemetry tracing to avoid exporting spans during pytest.
+- Verified the complete linted test suite locally.

@@ -44,3 +44,4 @@ streamlit>=1.39
 pytest>=8.3
 respx>=0.21                    # mocks httpx / Groq HTTP calls
 ruff>=0.6                      # linter
+testcontainers[postgres]>=4.9   # for running PostgreSQL in tests
