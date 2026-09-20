@@ -38,6 +38,11 @@ FastAPI Backend
         +--> OpenTelemetry Traces
 ```
 
+## Live deployment
+
+- **Frontend Dashboard:** https://aman-aegis-ai.streamlit.app
+- **Backend API & Swagger Docs:** https://aegis-ai-api-u557.onrender.com/docs
+
 ## Quick start with Docker Compose
 
 Create a local `.env` file from the example:
