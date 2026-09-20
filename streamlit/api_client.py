@@ -2,6 +2,7 @@
 
 import os
 from typing import Any
+import streamlit as st
 
 import requests
 
@@ -9,7 +10,14 @@ import requests
 # Configuration
 # ============================================================
 
-API_URL = os.getenv("STREAMLIT_API_URL", "http://localhost:8000").rstrip("/")
+# API URL configuration
+try:
+    API_URL = st.secrets.get(
+        "STREAMLIT_API_URL",
+        os.getenv("STREAMLIT_API_URL", "http://localhost:8000"),
+    ).rstrip("/")
+except Exception:
+    API_URL = os.getenv("STREAMLIT_API_URL", "http://localhost:8000").rstrip("/")
 
 
 # ============================================================
