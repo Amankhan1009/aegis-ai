@@ -43,6 +43,8 @@ FastAPI Backend
 - **Frontend Dashboard:** https://aman-aegis-ai.streamlit.app
 - **Backend API & Swagger Docs:** https://aegis-ai-api-u557.onrender.com/docs
 
+> **Note:** The backend is deployed on Render's free tier. If the service has been inactive, Render may put it to sleep. The first request may take a little longer while the backend wakes up. Please allow the backend to wake up before using the Streamlit dashboard.
+
 ## Quick start with Docker Compose
 
 Create a local `.env` file from the example:
