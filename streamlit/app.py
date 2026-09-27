@@ -113,9 +113,13 @@ def _login_page() -> None:
         """
         **Demo Access**
 
+        This account is provided for demonstration purposes to explore the AegisAI operations dashboard.
+
         Username: `admin`
 
         Password: `admin-pass-123`
+
+        *This is a demo administrative account. Other accounts are not enabled for the public demo.*
         """
     )
 
@@ -129,6 +133,7 @@ def _login_page() -> None:
             st.rerun()
         except APIClientError as exc:
             _show_api_error(exc)
+
 
 # ============================================================
 # Dashboard pages
