@@ -99,10 +99,26 @@ def _login_page() -> None:
     st.title("AegisAI Operations")
     st.caption("Enterprise AI Operations Platform")
     st.subheader("Sign in")
+
     with st.form("login_form"):
         username = st.text_input("Username", autocomplete="username")
-        password = st.text_input("Password", type="password", autocomplete="current-password")
+        password = st.text_input(
+            "Password",
+            type="password",
+            autocomplete="current-password",
+        )
         submitted = st.form_submit_button("Sign in", type="primary")
+
+    st.info(
+        """
+        **Demo Access**
+
+        Username: `admin`
+
+        Password: `admin-pass-123`
+        """
+    )
+
     if submitted:
         try:
             result = login(username, password)
@@ -113,9 +129,6 @@ def _login_page() -> None:
             st.rerun()
         except APIClientError as exc:
             _show_api_error(exc)
-        except KeyError:
-            st.error("The login response did not include an access token.")
-
 
 # ============================================================
 # Dashboard pages
